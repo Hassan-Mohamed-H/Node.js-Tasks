@@ -30,7 +30,7 @@ function countVowels(str) {
     }
     return total
 }
-console.log(countVowels("Hassan Mohamed Hussien"))
+// console.log(countVowels("Hassan Mohamed Hussien"))
 
 // ------------------------------------------------------------
 // Task 2 — invertCase(str)
@@ -56,7 +56,7 @@ function invertCase(str) {
    
     return phrase; // replace
 }
-console.log(invertCase("Hassan 123!"))
+// console.log(invertCase("Hassan 123!"))
 
 // ------------------------------------------------------------
 // Task 3 — uniqueMerge(a, b)
@@ -80,7 +80,7 @@ function uniqueMerge(a, b) {
     return final 
 }
 
-console.log(uniqueMerge([1,2,2,3,4,5,3,6,7,8,9],[1,9,10,15,12,4,3,17,9]))
+// console.log(uniqueMerge([1,2,2,3,4,5,3,6,7,8,9],[1,9,10,15,12,4,3,17,9]))
 // ------------------------------------------------------------
 // Task 4 — findFirstIndexDivisibleBy(nums, x, y)
 // Return the INDEX of the first number divisible by BOTH x and y.
@@ -95,10 +95,10 @@ function findFirstIndexDivisibleBy(nums, x, y) {
             
         }
     }
-    return -1// replace
+    return -1+z// replace
 }
 
-console.log(findFirstIndexDivisibleBy([1,2,24,8,12],2,4))
+// console.log(findFirstIndexDivisibleBy([1,2,24,8,12],2,4))
 
 // ------------------------------------------------------------
 // Task 5 — allTruthy(values)
@@ -113,7 +113,7 @@ function allTruthy(values) {
     }
     return true; // replace
 }
-console.log(allTruthy([1,"Hassan",0]))
+// console.log(allTruthy([1,"Hassan",0]))
 
 // ------------------------------------------------------------
 // Task 6 — pickEveryNth(arr, n)
@@ -129,7 +129,7 @@ function pickEveryNth(arr, n) {
     return newarr; // replace
 }
 
-console.log(pickEveryNth([1,2,3,4,5,6,7,8,9,10,11,12,13],4))
+// console.log(pickEveryNth([1,2,3,4,5,6,7,8,9,10,11,12,13],4))
 
 // ------------------------------------------------------------
 // Task 7 — ticketPrice(customer)
@@ -165,7 +165,7 @@ function ticketPrice(customer) {
     return price; // replace
 }
 
-console.log("Price = ",ticketPrice({ age: 21, isStudent: true, hasCoupon: false }))
+// console.log("Price = ",ticketPrice({ age: 21, isStudent: true, hasCoupon: false }))
 // ------------------------------------------------------------
 // Task 8 — normalizeNames(names)
 // Given an array of messy names, return a NEW array in the same order
@@ -187,7 +187,7 @@ function normalizeNames(names) {
     return finalName // replace
 }
 
-console.log(normalizeNames(["  hAssan MOhamed","mohamed Hussien"]))
+// console.log(normalizeNames(["  hAssan MOhamed","mohamed Hussien"]))
 
 // ------------------------------------------------------------
 // Task 9 — buildProductCatalog(rawItems)
@@ -198,19 +198,34 @@ console.log(normalizeNames(["  hAssan MOhamed","mohamed Hussien"]))
 //   - label(): returns (this.brand || "Generic") + " " + this.name
 // Return an array of product instances. Use a loop (no map).
 // ------------------------------------------------------------
+
+rawItems = [{name:"Mouse", brand:"Logi", stock:10}, {name:"SSD", stock:0}]
+
 const productProto = {
     isAvailable: function () { return this.stock > 0; },
     label: function () { return (this.brand || "Generic") + " " + this.name; }
 };
 
 function buildProductCatalog(rawItems) {
-    
-    // TODO
-    // Hint: for each item, create obj = Object.create(productProto);
-    // copy properties (name/brand/stock) into it; push into result.
-    return []; // replace
+
+    let result =[]
+
+    for (let value of rawItems){
+
+        let obj = Object.create(productProto)
+
+        obj.name = value.name
+        obj.brand = value.brand
+        obj.stock = value.stock
+
+        result.push(obj)
+    }
+
+    return result; // replace
 }
 
+// console.log(buildProductCatalog(rawItems)[1].isAvailable())
+// console.log(buildProductCatalog(rawItems)[1].label())
 // ------------------------------------------------------------
 // Task 10 (while challenge) — sumUntilLimit(nums, limit)
 // Add numbers from 'nums' in order using a WHILE loop until
@@ -218,10 +233,21 @@ function buildProductCatalog(rawItems) {
 // does NOT exceed the limit. Example: nums=[5,7,4], limit=12 => 5+7=12 (stop) -> 12
 // ------------------------------------------------------------
 function sumUntilLimit(nums, limit) {
+    // let nums = [1,2,3,4,5,6,7,8,9]
+    let sum = 0
+    let i = 0
+    while (i < nums.length){
+        
+        if (sum + nums[i] > limit){
+          break
+        }
+        sum += nums[i]
+        i ++
+    }
     // TODO (while loop)
-    return 0; // replace
+    return sum; // replace
 }
-
+// console.log(sumUntilLimit([1,2,3,4,5,6,7,8,9],27))
 // ------------------------------------------------------------
 // Task 11 (logic puzzle) — safeLogin(user, policy)
 // user = { email, password }
@@ -233,8 +259,28 @@ function sumUntilLimit(nums, limit) {
 // Use loops, string methods, and logical operators (no regex).
 // ------------------------------------------------------------
 function safeLogin(user, policy) {
-    // TODO
-    return false; // replace
+
+    if (user.password.length < policy.minLen){
+        return false
+    }
+
+
+    let mustInclude = false
+    if (policy.mustIncludeNumber === true){
+        for (let x of user.password){
+            if (x >= "0" && x <= "9"){
+                mustInclude = true
+                break
+            }
+        }
+        if(!mustInclude) return false
+    }
+
+    if (user.password.toLowerCase().includes(policy.blockWord.toLowerCase())){
+        return false
+    }
+    
+    return true; // replace
 }
 
 
@@ -242,56 +288,56 @@ function safeLogin(user, policy) {
 // DEMO CALLS (Uncomment to test as you solve)
 // ============================================================
 
-// console.log("\n--- Task 1 ---");
-// console.log(countVowels("Ammar Massoud")); // expect > 0
+console.log("\n--- Task 1 ---");
+console.log(countVowels("Ammar Massoud")); // expect > 0
 
-// console.log("\n--- Task 2 ---");
-// console.log(invertCase("HeLLo 123!")); // "hEllO 123!"
+console.log("\n--- Task 2 ---");
+console.log(invertCase("HeLLo 123!")); // "hEllO 123!"
 
-// console.log("\n--- Task 3 ---");
-// console.log(uniqueMerge([1,2,3,2],[3,4,1,5])); // [1,2,3,4,5]
+console.log("\n--- Task 3 ---");
+console.log(uniqueMerge([1,2,3,2],[3,4,1,5])); // [1,2,3,4,5]
 
-// console.log("\n--- Task 4 ---");
-// console.log(findFirstIndexDivisibleBy([2,7,9,10,12,15,22], 3, 5)); // index of 15
+console.log("\n--- Task 4 ---");
+console.log(findFirstIndexDivisibleBy([2,7,9,10,12,15,22], 3, 5)); // index of 15
 
-// console.log("\n--- Task 5 ---");
-// console.log(allTruthy([1, "x", {}, []])); // true
-// console.log(allTruthy([1, 0, "x"])); // false
+console.log("\n--- Task 5 ---");
+console.log(allTruthy([1, "x", {}, []])); // true
+console.log(allTruthy([1, 0, "x"])); // false
 
-// console.log("\n--- Task 6 ---");
-// console.log(pickEveryNth(["a","b","c","d","e","f"], 2)); // ["a","c","e"]
+console.log("\n--- Task 6 ---");
+console.log(pickEveryNth(["a","b","c","d","e","f"], 2)); // ["a","c","e"]
 
-// console.log("\n--- Task 7 ---");
-// console.log(ticketPrice({ age: 4, isStudent: false, hasCoupon: false }));  // 0
-// console.log(ticketPrice({ age: 15, isStudent: false, hasCoupon: true }));  // 6
-// console.log(ticketPrice({ age: 20, isStudent: true, hasCoupon: true }));   // 6
-// console.log(ticketPrice({ age: 70, isStudent: false, hasCoupon: true }));  // 4
-// console.log(ticketPrice({ age: 30, isStudent: false, hasCoupon: true }));  // 10
+console.log("\n--- Task 7 ---");
+console.log(ticketPrice({ age: 4, isStudent: false, hasCoupon: false }));  // 0
+console.log(ticketPrice({ age: 15, isStudent: false, hasCoupon: true }));  // 6
+console.log(ticketPrice({ age: 20, isStudent: true, hasCoupon: true }));   // 6
+console.log(ticketPrice({ age: 70, isStudent: false, hasCoupon: true }));  // 4
+console.log(ticketPrice({ age: 30, isStudent: false, hasCoupon: true }));  // 10
 
-// console.log("\n--- Task 8 ---");
-// console.log(normalizeNames(["   aMMaR massOUD  ", " SARA ", "oMaR"]));
+console.log("\n--- Task 8 ---");
+console.log(normalizeNames(["   aMMaR massOUD  ", " SARA ", "oMaR"]));
 
-// console.log("\n--- Task 9 ---");
-// const items = [
-//   { name: "Mouse", brand: "Logi", stock: 10 },
-//   { name: "SSD", stock: 0 },
-//   { name: "Keyboard", brand: "KeyCo", stock: 3 },
-// ];
-// const catalog = buildProductCatalog(items);
-// console.log(catalog.map(p => ({ label: p.label(), available: p.isAvailable() })));
+console.log("\n--- Task 9 ---");
+const items = [
+  { name: "Mouse", brand: "Logi", stock: 10 },
+  { name: "SSD", stock: 0 },
+  { name: "Keyboard", brand: "KeyCo", stock: 3 },
+];
+const catalog = buildProductCatalog(items);
+console.log(catalog.map(p => ({ label: p.label(), available: p.isAvailable() })));
 
 // console.log("\n--- Task 10 ---");
 // console.log(scoresReport({ Alice: 17, Bob: 22, Carol: 22, Dan: 9 }));
 
-// console.log("\n--- Task 11 ---");
-// console.log(sumUntilLimit([5, 7, 4], 12)); // 12
-// console.log(sumUntilLimit([6, 6, 6], 10)); // 6
+console.log("\n--- Task 11 ---");
+console.log(sumUntilLimit([5, 7, 4], 12)); // 12
+console.log(sumUntilLimit([6, 6, 6], 10)); // 6
 
-// console.log("\n--- Task 12 ---");
-// console.log(safeLogin(
-//   { email: "a@b.com", password: "He11oWorld" },
-//   { minLen: 8, mustIncludeNumber: true, blockWord: "password" }
-// )); // true or false depending on rules
+console.log("\n--- Task 12 ---");
+console.log(safeLogin(
+  { email: "a@b.com", password: "He11oWorld" },
+  { minLen: 8, mustIncludeNumber: true, blockWord: "password" }
+)); // true or false depending on rules
 
 // ============================================================
 // End — Have fun!
