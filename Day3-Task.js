@@ -329,11 +329,11 @@ console.log(catalog.map(p => ({ label: p.label(), available: p.isAvailable() }))
 // console.log("\n--- Task 10 ---");
 // console.log(scoresReport({ Alice: 17, Bob: 22, Carol: 22, Dan: 9 }));
 
-console.log("\n--- Task 11 ---");
+console.log("\n--- Task 10 ---");
 console.log(sumUntilLimit([5, 7, 4], 12)); // 12
 console.log(sumUntilLimit([6, 6, 6], 10)); // 6
 
-console.log("\n--- Task 12 ---");
+console.log("\n--- Task 11 ---");
 console.log(safeLogin(
   { email: "a@b.com", password: "He11oWorld" },
   { minLen: 8, mustIncludeNumber: true, blockWord: "password" }
